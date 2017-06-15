@@ -16,7 +16,7 @@ def parse_args():
   return (options, arguments)
     
 class Runner (object):
-  def __init__(self, schema, extra_fields=''):
+  def __init__(self, schema, extra_fields):
     reg = re.sub('\$([a-z]*)', "([^\s]*)", schema)
     reg = reg.replace(' ', '\s+').replace('_', '[^\s]*')
     self.reg = reg
