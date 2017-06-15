@@ -12,7 +12,11 @@ class Logs(unittest.TestCase):
         runner = Runner('$date $hour _ _ _ _ _ $ip', '')
         res = runner.process('2017-06-15 03:51:02,043 fail2ban.filter         [1112]: INFO    [sshd] Found 103.207.39.83')
         self.assertEqual(res, {'date': '2017-06-15', 'hour': '03:51:02,043', 'ip': '103.207.39.83'})
-    
+
+    def test_with_extra_fields(self):
+        runner = Runner('$date', 'foo=foo,hello=world')
+        res = runner.process('2017-06-15 03:51:02,043 fail2ban.filter         [1112]: INFO    [sshd] Found 103.207.39.83')
+        self.assertEqual(res, {'date': '2017-06-15', 'foo': 'foo', 'hello': 'world'})
 
 def main():
     unittest.main()
